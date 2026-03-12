@@ -32,8 +32,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
         return path.equals("/auth/v1/login")
-                || path.equals("auth/v1/signup")
-                || path.equals("auth/v1/refreshToken");
+                || path.equals("/auth/v1/signup")
+                || path.equals("/auth/v1/refreshToken");
     }
 
 
