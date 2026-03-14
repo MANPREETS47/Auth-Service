@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import org.example.entities.userinfo;
 import org.example.model.UserinfoDto;
+import org.example.EventProducer.UserInfoProducer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RefreshTokenService refreshTokenService;
     private final PasswordEncoder passwordEncoder;
+    private final UserInfoProducer userInfoProducer;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -48,6 +50,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         String userId = UUID.randomUUID().toString();
         userRepository.save(new userinfo(userId, userinfoDto.getUsername(), userinfoDto.getPassword(), new HashSet<>()));
+        userInfoProducer.sendEventToKafka(userinfoDto);
         return true;
     }
 
