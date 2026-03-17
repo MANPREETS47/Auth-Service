@@ -14,6 +14,7 @@ import java.util.UUID;
 import org.example.entities.userinfo;
 import org.example.model.UserinfoDto;
 import org.example.EventProducer.UserInfoProducer;
+import org.example.EventProducer.UserinfoEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,8 +51,18 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         String userId = UUID.randomUUID().toString();
         userRepository.save(new userinfo(userId, userinfoDto.getUsername(), userinfoDto.getPassword(), new HashSet<>()));
-        userInfoProducer.sendEventToKafka(userinfoDto);
+        userInfoProducer.sendEventToKafka(userinfoEvent(userinfoDto, userId));
         return true;
+    }
+
+    private UserinfoEvent userinfoEvent(UserinfoDto userinfoDto, String userId){
+        return UserinfoEvent.builder()
+                .id(userId)
+                .firstname(userinfoDto.getUserName())
+                .lastname(userinfoDto.getLastName())
+                .email(userinfoDto.getEmail())
+                .phoneNumber(userinfoDto.getPhoneNumber())
+                .build();
     }
 
 }

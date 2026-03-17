@@ -1,12 +1,12 @@
 package org.example.serializer;
 
 import org.apache.kafka.common.serialization.Serializer;
-import org.example.model.UserinfoDto;
+import org.example.EventProducer.UserinfoEvent;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class UserInfoSerializer implements Serializer<UserinfoDto> {
+public class UserInfoSerializer implements Serializer<UserinfoEvent> {
 
     @Override
     public void configure(java.util.Map<String, ?> configs, boolean isKey) {
@@ -15,7 +15,7 @@ public class UserInfoSerializer implements Serializer<UserinfoDto> {
     
 
     @Override
-    public byte[] serialize(String topic, UserinfoDto data) {
+    public byte[] serialize(String topic, UserinfoEvent data) {
         byte[] retval = null;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
