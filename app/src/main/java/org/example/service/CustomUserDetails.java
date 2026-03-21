@@ -26,7 +26,6 @@ public class CustomUserDetails extends userinfo implements UserDetails{
         for (userroles role : user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
         }
-        // Assuming you have a method to convert user roles to authorities
         this.authorities = authorities;
     }
 

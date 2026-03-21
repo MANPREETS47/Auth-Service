@@ -58,8 +58,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserinfoEvent userinfoEvent(UserinfoDto userinfoDto, String userId){
         return UserinfoEvent.builder()
                 .id(userId)
-                .firstname(userinfoDto.getUserName())
-                .lastname(userinfoDto.getLastName())
+                .userName(userinfoDto.getUsername())
+                .lastName(userinfoDto.getLastName())
                 .email(userinfoDto.getEmail())
                 .phoneNumber(userinfoDto.getPhoneNumber())
                 .build();

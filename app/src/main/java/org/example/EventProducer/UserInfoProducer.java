@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.example.model.UserinfoDto;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -15,13 +14,13 @@ import org.springframework.kafka.support.KafkaHeaders;
 public class UserInfoProducer {
     
 
-    private final KafkaTemplate<String, UserinfoDto> kafkaTemplate;
+    private final KafkaTemplate<String, UserinfoEvent> kafkaTemplate;
 
     @Value("${spring.kafka.topic.name}")
     private String topicName;
 
     @Autowired
-    UserInfoProducer(KafkaTemplate<String, UserinfoDto> kafkaTemplate) {
+    UserInfoProducer(KafkaTemplate<String, UserinfoEvent> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

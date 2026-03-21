@@ -18,9 +18,9 @@ import lombok.Setter;
 public class UserinfoEvent {
     
 
-    public String firstname;
+    public String userName;
 
-    public String lastname;
+    public String lastName;
 
     public String email;
 
